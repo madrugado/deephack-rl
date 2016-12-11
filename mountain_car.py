@@ -66,7 +66,7 @@ def sarsa_lambda(env, q, policy, num_episodes=5000, gamma=0.99, alpha=0.005, lmb
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Sarsa-lambda algorithm.')
-    parser.add_argument('--env', '-e', type=str, default='FrozenLake8x8-v0', nargs='?',
+    parser.add_argument('--env', '-e', type=str, default='MountainCar-v0', nargs='?',
                         help='The environment to use')
     parser.add_argument('--num_episodes', '-n', metavar='N', type=int, default=25000, nargs='?',
                         help='Number of episodes')
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 
     env = gym.make(args.env)
     q = {}
-    for s in range(env.nS):
+    for s in range(int((env.max_position - env.min_position) / 0.1)):
         q[s] = np.zeros(env.action_space.n)
 
     policy = EgreedyPolicy(env, q, e=1.)
